@@ -1,13 +1,11 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet } from "react-router-dom";
 
-import { PageLayout } from '../components/layouts/PageLayout/PageLayout';
-import { ScrollToTop } from '../components/helpers/ScrollToTop';
+import { MainLayout } from "../components/layouts/MainLayout/MainLayout";
 
 export const AppRoot = () => {
   return (
-    <PageLayout>
-      <ScrollToTop />
+    <MainLayout>
       <Outlet />
-    </PageLayout>
+    </MainLayout>
   );
 };
