@@ -1,3 +1,5 @@
+import React, { Fragment } from "react";
+
 import {
   AppBar,
   Toolbar,
@@ -7,45 +9,32 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-
-// Import icons
 import MenuIcon from "@mui/icons-material/Menu";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import CloseIcon from "@mui/icons-material/Close";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import { drawerWidth } from "./MainLayout";
+import { headerStyles } from "./Header.styles";
 
 type HeaderProps = {
   drawerOpen: boolean;
   toggleDrawer: () => void;
   isMediumUp: boolean;
-  transitionDuration: number; // transition duration in ms
+  transitionDuration: number;
 };
 
-export const Header = ({
+export const Header: React.FC<HeaderProps> = ({
   drawerOpen,
   toggleDrawer,
   isMediumUp,
   transitionDuration,
-}: HeaderProps) => {
+}) => {
   const theme = useTheme();
 
   return (
-    <>
-      <AppBar
-        position="fixed"
-        sx={{
-          // Shift the AppBar when the drawer is open on larger screens.
-          ml: isMediumUp && drawerOpen ? `${drawerWidth}px` : 0,
-          width:
-            isMediumUp && drawerOpen ? `calc(100% - ${drawerWidth}px)` : "100%",
-          transition: theme.transitions.create(["margin", "width"], {
-            easing: theme.transitions.easing.sharp,
-            duration: transitionDuration,
-          }),
-        }}
-      >
+    <Fragment>
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton
             edge="start"
@@ -55,9 +44,11 @@ export const Header = ({
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1, ml: 1 }}>
+
+          <Typography variant="h6" sx={headerStyles.title}>
             App Title
           </Typography>
+
           <IconButton color="inherit" aria-label="account">
             <AccountCircleIcon />
           </IconButton>
@@ -72,47 +63,21 @@ export const Header = ({
         open={drawerOpen}
         onClose={toggleDrawer}
         ModalProps={{ keepMounted: true }}
-        trans
-        sx={{
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-            transition: theme.transitions.create("width", {
-              easing: theme.transitions.easing.sharp,
-              duration: transitionDuration,
-            }),
-          },
-        }}
+        sx={headerStyles.drawer(transitionDuration)}
       >
-        <Box
-          sx={{
-            width: drawerWidth,
-            p: 2,
-            height: "100%",
-            backgroundColor: theme.palette.background.paper,
-            display: "flex",
-            flexDirection: "column",
-          }}
-          role="presentation"
-        >
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mb: 2,
-            }}
-          >
+        <Box sx={headerStyles.drawerContent} role="presentation">
+          <Box sx={headerStyles.drawerHeader}>
             <Typography variant="h6">Menu</Typography>
             <IconButton onClick={toggleDrawer} aria-label="close drawer">
-              <CloseIcon />
+              <MenuOpenIcon fontSize="large" />
             </IconButton>
           </Box>
+          {/* Your menu items */}
           <Typography>Item 1</Typography>
           <Typography>Item 2</Typography>
           <Typography>Item 3</Typography>
         </Box>
       </Drawer>
-    </>
+    </Fragment>
   );
 };

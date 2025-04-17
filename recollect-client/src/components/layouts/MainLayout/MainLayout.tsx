@@ -5,9 +5,6 @@ import { Header } from "./Header";
 import { AppBarOffset } from "./AppBarOffset";
 import { mainLayoutStyles } from "./MainLayout.styles";
 
-// Shared drawer width constant
-export const drawerWidth = 250;
-
 type MainLayoutProps = {
   children: React.ReactNode;
 };
@@ -15,11 +12,8 @@ type MainLayoutProps = {
 export const MainLayout = ({ children }: MainLayoutProps) => {
   const theme = useTheme();
   const isMediumUp = useMediaQuery(theme.breakpoints.up("md"));
-
-  // Shared transition duration from theme. You could also use theme.transitions.duration.enteringScreen.
   const transitionDuration = theme.transitions.duration.leavingScreen;
 
-  // Drawer state is lifted here.
   const [drawerOpen, setDrawerOpen] = useState<boolean>(isMediumUp);
 
   useEffect(() => {
@@ -32,7 +26,6 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 
   return (
     <Box sx={mainLayoutStyles.container}>
-      {/* Pass state and toggle function into Header */}
       <Header
         drawerOpen={drawerOpen}
         toggleDrawer={toggleDrawer}
@@ -42,14 +35,11 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
       <AppBarOffset id="back-to-top-anchor" />
       <Box
         component="main"
-        sx={{
-          ...mainLayoutStyles.content,
-          ml: isMediumUp && drawerOpen ? `${drawerWidth}px` : 0,
-          transition: theme.transitions.create("margin", {
-            easing: theme.transitions.easing.sharp,
-            duration: transitionDuration,
-          }),
-        }}
+        sx={mainLayoutStyles.content({
+          isMediumUp,
+          drawerOpen,
+          transitionDuration,
+        })}
       >
         <main role="main">{children}</main>
       </Box>
