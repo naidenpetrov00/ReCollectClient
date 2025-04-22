@@ -3,14 +3,20 @@ import { SxProps, Theme } from "@mui/material";
 import { drawerWidth } from "../constants";
 
 interface HeaderStyles {
-  drawer: (transitionDuration: number) => SxProps<Theme>;
+  iconButton: (theme: Theme) => SxProps<Theme>;
+  appBar: (theme: Theme) => SxProps<Theme>;
+  drawer: (transitionDuration: number, theme: Theme) => SxProps<Theme>;
   drawerContent: SxProps<Theme>;
   drawerHeader: SxProps<Theme>;
-  title: SxProps<Theme>;
+  title: (theme: Theme) => SxProps<Theme>;
 }
 
 export const headerStyles: HeaderStyles = {
-  drawer: (transitionDuration) => ({
+  iconButton: (theme) => ({ color: theme.palette.appColors.primaryA0 }),
+  appBar: (theme) => ({
+    backgroundColor: theme.palette.appColors.surfaceA10,
+  }),
+  drawer: (transitionDuration, theme) => ({
     "& .MuiDrawer-paper": {
       width: drawerWidth,
       boxSizing: "border-box",
@@ -21,27 +27,25 @@ export const headerStyles: HeaderStyles = {
         }),
       overflowX: "hidden",
       overflowY: "auto",
+      backgroundColor: theme.palette.appColors.surfaceA10,
     },
   }),
-
   drawerContent: {
     width: drawerWidth,
     p: 2,
     height: "100%",
-    bgcolor: (theme: Theme) => theme.palette.background.paper,
     display: "flex",
     flexDirection: "column",
   },
-
   drawerHeader: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     mb: 2,
   },
-
-  title: {
+  title: (theme) => ({
     flexGrow: 1,
     ml: 1,
-  },
+    color: theme.palette.appColors.primaryA10,
+  }),
 };

@@ -34,9 +34,10 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <Fragment>
-      <AppBar position="fixed">
+      <AppBar position="fixed" sx={headerStyles.appBar(theme)}>
         <Toolbar>
           <IconButton
+            sx={headerStyles.iconButton(theme)}
             edge="start"
             color="inherit"
             aria-label="open menu"
@@ -45,14 +46,18 @@ export const Header: React.FC<HeaderProps> = ({
             <MenuIcon />
           </IconButton>
 
-          <Typography variant="h6" sx={headerStyles.title}>
-            App Title
+          <Typography variant="h6" sx={headerStyles.title(theme)}>
+            ReCollect
           </Typography>
 
-          <IconButton color="inherit" aria-label="account">
+          <IconButton sx={headerStyles.iconButton(theme)} aria-label="account">
             <AccountCircleIcon />
           </IconButton>
-          <IconButton color="inherit" aria-label="settings">
+          <IconButton
+            sx={headerStyles.iconButton(theme)}
+            color="inherit"
+            aria-label="settings"
+          >
             <SettingsIcon />
           </IconButton>
         </Toolbar>
@@ -63,19 +68,25 @@ export const Header: React.FC<HeaderProps> = ({
         open={drawerOpen}
         onClose={toggleDrawer}
         ModalProps={{ keepMounted: true }}
-        sx={headerStyles.drawer(transitionDuration)}
+        sx={headerStyles.drawer(transitionDuration, theme)}
       >
         <Box sx={headerStyles.drawerContent} role="presentation">
           <Box sx={headerStyles.drawerHeader}>
-            <Typography variant="h6">Menu</Typography>
-            <IconButton onClick={toggleDrawer} aria-label="close drawer">
-              <MenuOpenIcon fontSize="large" />
+            <Typography variant="h6" sx={headerStyles.iconButton(theme)}>
+              ReCollect
+            </Typography>
+            <IconButton
+              onClick={toggleDrawer}
+              aria-label="close drawer"
+              sx={headerStyles.iconButton(theme)}
+            >
+              <MenuOpenIcon fontSize="medium" />
             </IconButton>
           </Box>
           {/* Your menu items */}
-          <Typography>Item 1</Typography>
-          <Typography>Item 2</Typography>
-          <Typography>Item 3</Typography>
+          <Typography sx={headerStyles.iconButton(theme)}>Item 1</Typography>
+          <Typography sx={headerStyles.iconButton(theme)}>Item 2</Typography>
+          <Typography sx={headerStyles.iconButton(theme)}>Item 3</Typography>
         </Box>
       </Drawer>
     </Fragment>

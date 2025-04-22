@@ -1,22 +1,18 @@
 import { useMemo } from "react";
 
 import { createTheme, Theme } from "@mui/material";
+import { ThemeMode } from "../types/design";
+import { appColors } from "../config/colors";
 
-const colorPallete = {
-  black: "#181C14",
-  grey: "#3C3D37",
-  green: "#697565",
-  white: "#ECDFCC",
-};
+export const useCustomTheme = (mode: ThemeMode = ThemeMode.Light): Theme => {
+  const resolvedAppColors = Object.fromEntries(
+    Object.entries(appColors).map(([key, value]) => [key, value[mode]])
+  );
 
-export const useCustomTheme = (): Theme => {
   return useMemo(() => {
     return createTheme({
       palette: {
-        primary: { main: colorPallete.black },
-        secondary: { main: colorPallete.green },
-        background: { paper: colorPallete.grey },
-        text: { primary: colorPallete.white, secondary: colorPallete.black },
+        appColors: resolvedAppColors,
       },
       components: {
         MuiCssBaseline: {
@@ -31,5 +27,5 @@ export const useCustomTheme = (): Theme => {
         },
       },
     });
-  }, []);
+  }, [mode]);
 };

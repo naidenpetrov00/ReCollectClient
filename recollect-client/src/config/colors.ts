@@ -1,0 +1,36 @@
+export const appColors = {
+  primaryA0: { light: "#09eb94", dark: "#09ea95" },
+  primaryA10: { light: "#39df92", dark: "#4deda1" },
+  primaryA20: { light: "#4dd390", dark: "#6ef0ac" },
+  primaryA30: { light: "#5bc78e", dark: "#88f3b8" },
+  primaryA40: { light: "#66bb8c", dark: "#9ef5c4" },
+  primaryA50: { light: "#6eb08a", dark: "#b3f8cf" },
+
+  dangerA0: { light: "#eb0960", dark: "#eb0960" },
+  dangerA10: { light: "#e13063", dark: "#f14270" },
+  dangerA20: { light: "#d74367", dark: "#f66180" },
+  dangerA30: { light: "#cc506a", dark: "#fb7a91" },
+  dangerA40: { light: "#cc506a", dark: "#fe92a3" },
+  dangerA50: { light: "#c15b6e", dark: "#ffa9b4" },
+
+  warningA0: { light: "#eb9409", dark: "#eb9409" },
+  warningA10: { light: "#e09225", dark: "#f0a034" },
+  warningA20: { light: "#d69035", dark: "#f5ab50" },
+  warningA30: { light: "#cb8e43", dark: "#f9b76a" },
+  warningA40: { light: "#bf8c4e", dark: "#fcc383" },
+  warningA50: { light: "#b48959", dark: "#fecf9b" },
+
+  surfaceA0: { light: "#ffffff", dark: "#121212" },
+  surfaceA10: { light: "#f0f0f0", dark: "#282828" },
+  surfaceA20: { light: "#e1e1e1", dark: "#3f3f3f" },
+  surfaceA30: { light: "#d3d3d3", dark: "#575757" },
+  surfaceA40: { light: "#c5c5c5", dark: "#717171" },
+  surfaceA50: { light: "#b6b6b6", dark: "#8b8b8b" },
+
+  surfaceTonalA0: { light: "#effef4", dark: "#19241e" },
+  surfaceTonalA10: { light: "#e2efe6", dark: "#2e3933" },
+  surfaceTonalA20: { light: "#d5e1d9", dark: "#454e49" },
+  surfaceTonalA30: { light: "#c9d2cc", dark: "#5d6560" },
+  surfaceTonalA40: { light: "#bcc4bf", dark: "#767d79" },
+  surfaceTonalA50: { light: "#b0b6b2", dark: "#909692" },
+};
