@@ -16,6 +16,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import { headerStyles } from "./Header.styles";
+import { Navigation } from "./Navigation";
 
 type HeaderProps = {
   drawerOpen: boolean;
@@ -83,10 +84,7 @@ export const Header: React.FC<HeaderProps> = ({
               <MenuOpenIcon fontSize="medium" />
             </IconButton>
           </Box>
-          {/* Your menu items */}
-          <Typography sx={headerStyles.iconButton(theme)}>Item 1</Typography>
-          <Typography sx={headerStyles.iconButton(theme)}>Item 2</Typography>
-          <Typography sx={headerStyles.iconButton(theme)}>Item 3</Typography>
+          <Navigation />
         </Box>
       </Drawer>
     </Fragment>
