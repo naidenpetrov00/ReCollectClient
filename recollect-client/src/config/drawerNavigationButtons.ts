@@ -11,7 +11,7 @@ export const navigationsConfig: NavigationsConfig = [
     type: NavigationTypes.Button,
     label: "Cases",
     Icon: DescriptionIcon,
-    onClick: () => openDocumentsWindow(),
+    onClick: () => openCases(),
   },
   {
     key: "tools",
@@ -36,9 +36,7 @@ export const navigationsConfig: NavigationsConfig = [
     ],
   },
 ];
-function openDocumentsWindow() {
-  throw new Error("Function not implemented.");
-}
+function openCases() {}
 
 function openInboxWindow() {
   throw new Error("Function not implemented.");

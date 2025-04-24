@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+
 import { Box, useTheme, useMediaQuery } from "@mui/material";
 
 import { Header } from "./Header";
 import { AppBarOffset } from "./AppBarOffset";
+
 import { mainLayoutStyles } from "./MainLayout.styles";
 
 type MainLayoutProps = {
@@ -34,14 +36,15 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
       />
       <AppBarOffset id="back-to-top-anchor" />
       <Box
-        component="main"
+        id="window-container"
         sx={mainLayoutStyles.content({
           isMediumUp,
           drawerOpen,
           transitionDuration,
         })}
+        component="main"
       >
-        <main role="main">{children}</main>
+        {children}
       </Box>
     </Box>
   );
