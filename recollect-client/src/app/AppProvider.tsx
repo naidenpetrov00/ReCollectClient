@@ -10,6 +10,8 @@ import { MainErrorFallback } from "../components/errors/MainError";
 import { queryConfig } from "../config/reactQuery";
 
 import { useCustomTheme } from "../hooks/useCustomTheme";
+import { Provider } from "react-redux";
+import { store } from "../store/store";
 
 type AppProviderProps = {
   children: ReactNode;
@@ -22,17 +24,19 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   const theme = useCustomTheme();
 
   return (
-    <Suspense fallback={<Spinner />}>
-      <ErrorBoundary FallbackComponent={MainErrorFallback}>
-        <QueryClientProvider client={queryClient}>
-          <ThemeProvider theme={theme}>
-            <HelmetProvider>
-              <CssBaseline />
-              {children}
-            </HelmetProvider>
-          </ThemeProvider>
-        </QueryClientProvider>
-      </ErrorBoundary>
-    </Suspense>
+    <Provider store={store}>
+      <Suspense fallback={<Spinner />}>
+        <ErrorBoundary FallbackComponent={MainErrorFallback}>
+          <QueryClientProvider client={queryClient}>
+            <ThemeProvider theme={theme}>
+              <HelmetProvider>
+                <CssBaseline />
+                {children}
+              </HelmetProvider>
+            </ThemeProvider>
+          </QueryClientProvider>
+        </ErrorBoundary>
+      </Suspense>
+    </Provider>
   );
 };

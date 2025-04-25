@@ -11,6 +11,12 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { af } from "react-router/dist/development/route-data-5OzAzQtT";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
+import {
+  openWindow,
+  selectWindowsState,
+} from "../../../store/slices/windowsSlice";
+import { useSelector } from "react-redux";
 
 function PaperComponent(props: PaperProps) {
   const nodeRef = React.useRef<HTMLDivElement>(null);
@@ -34,6 +40,9 @@ interface WindowLayoutProps {
 }
 
 export const WindowLayout = ({ title, children }: WindowLayoutProps) => {
+  const state = useAppSelector(selectWindowsState);
+  const dispatch = useAppDispatch();
+  dispatch(openWindow());
   const [open, setOpen] = useState(true);
   const [minimized, setMinimized] = useState(false);
   const [container, setContainer] = useState<HTMLElement | null>(null);

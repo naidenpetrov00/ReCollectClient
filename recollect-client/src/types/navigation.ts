@@ -24,3 +24,4 @@ export interface NavigationAccordion extends NavigationItemBase {
 export type NavigationItem = NavigationAccordion | NavigationButton;
 
 export type NavigationsConfig = NavigationItem[];
+
