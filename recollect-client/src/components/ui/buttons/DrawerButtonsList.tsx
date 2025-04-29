@@ -8,9 +8,9 @@ interface DrawerButtonsList {
 }
 
 export const DrawerButtonsList = ({ navigation }: DrawerButtonsList) => {
-  const { children, Icon, label, key } = navigation;
+  const { children, Icon, label } = navigation;
   return (
-    <Accordion key={key} disableGutters elevation={0}>
+    <Accordion key={label} disableGutters elevation={0}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         {label}
       </AccordionSummary>

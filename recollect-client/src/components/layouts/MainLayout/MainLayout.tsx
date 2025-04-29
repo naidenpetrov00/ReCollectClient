@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 
 import { Box, useTheme, useMediaQuery } from "@mui/material";
 
-import { Header } from "./Header";
-import { AppBarOffset } from "./AppBarOffset";
+import { Header } from "../../Header/Header";
+import { AppBarOffset } from "../../helpers/AppBarOffset";
 
 import { mainLayoutStyles } from "./MainLayout.styles";
 

@@ -1,21 +1,13 @@
 import { SxProps, Theme } from "@mui/material";
+import { drawerWidth } from "../layouts/constants";
 
-import { drawerWidth } from "../constants";
-
-interface HeaderStyles {
-  iconButton: (theme: Theme) => SxProps<Theme>;
-  appBar: (theme: Theme) => SxProps<Theme>;
+interface DrawerStyles {
   drawer: (transitionDuration: number, theme: Theme) => SxProps<Theme>;
   drawerContent: SxProps<Theme>;
   drawerHeader: SxProps<Theme>;
-  title: (theme: Theme) => SxProps<Theme>;
 }
 
-export const headerStyles: HeaderStyles = {
-  iconButton: (theme) => ({ color: theme.palette.appColors.primaryA0 }),
-  appBar: (theme) => ({
-    backgroundColor: theme.palette.appColors.surfaceA10,
-  }),
+export const drawerStyles: DrawerStyles = {
   drawer: (transitionDuration, theme) => ({
     "& .MuiDrawer-paper": {
       width: drawerWidth,
@@ -43,9 +35,4 @@ export const headerStyles: HeaderStyles = {
     alignItems: "center",
     mb: 2,
   },
-  title: (theme) => ({
-    flexGrow: 1,
-    ml: 1,
-    color: theme.palette.appColors.primaryA10,
-  }),
 };

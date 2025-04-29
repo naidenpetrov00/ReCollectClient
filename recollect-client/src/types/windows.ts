@@ -1,5 +1,16 @@
-export interface WindowState {
-  isOpen: boolean;
-}
+import { WindowName } from "../store/slices/windowsInitialState";
 
-export type WindowsState = WindowState[];
+export type WindowData = {
+  title: string;
+  isOpen: boolean;
+  focused: boolean;
+};
+
+export type WindowsData = {
+  [key in WindowName]: WindowData;
+};
+
+export type WindowsState = {
+  windowsData: WindowsData;
+  openedOrder: WindowName[];
+};

@@ -1,47 +1,48 @@
-import EmailIcon from "@mui/icons-material/Email";
-import FolderIcon from "@mui/icons-material/Folder";
-import PeopleIcon from "@mui/icons-material/People";
+import TabIcon from "@mui/icons-material/Tab";
 import DescriptionIcon from "@mui/icons-material/Description";
 
+import { WindowName } from "../store/slices/windowsInitialState";
 import { NavigationsConfig, NavigationTypes } from "../types/navigation";
 
 export const navigationsConfig: NavigationsConfig = [
   {
-    key: "cases",
     type: NavigationTypes.Button,
-    label: "Cases",
+    label: "Case",
     Icon: DescriptionIcon,
-    onClick: () => openCases(),
   },
   {
-    key: "tools",
-    type: NavigationTypes.ButtonList,
-    label: "Tools",
-    Icon: FolderIcon,
-    children: [
-      {
-        key: "inbox",
-        type: NavigationTypes.Button,
-        label: "Inbox",
-        Icon: EmailIcon,
-        onClick: () => openInboxWindow(),
-      },
-      {
-        key: "users",
-        type: NavigationTypes.Button,
-        label: "Users",
-        Icon: PeopleIcon,
-        onClick: () => openUsersWindow(),
-      },
-    ],
+    type: NavigationTypes.Button,
+    label: "CasesList",
+    Icon: DescriptionIcon,
   },
+  {
+    type: NavigationTypes.Button,
+    label: "NewCase",
+    Icon: DescriptionIcon,
+  },
+  // {
+  //   type: NavigationTypes.ButtonList,
+  //   label: "Tools",
+  //   Icon: FolderIcon,
+  //   children: [
+  //     {
+  //       type: NavigationTypes.Button,
+  //       label: "Inbox",
+  //       Icon: EmailIcon,
+  //       onClick: () => openInboxWindow(),
+  //     },
+  //     {
+  //       type: NavigationTypes.Button,
+  //       label: "Users",
+  //       Icon: PeopleIcon,
+  //       onClick: () => openUsersWindow(),
+  //     },
+  //   ],
+  // },
 ];
-function openCases() {}
 
-function openInboxWindow() {
-  throw new Error("Function not implemented.");
-}
-
-function openUsersWindow() {
-  throw new Error("Function not implemented.");
-}
+export const getIconByName = (name: WindowName) => {
+  const icon = navigationsConfig.find((nav) => nav.label === name)?.Icon;
+  if (icon) return icon;
+  return TabIcon;
+};

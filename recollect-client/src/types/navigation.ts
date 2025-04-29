@@ -1,4 +1,5 @@
 import { SvgIconComponent } from "@mui/icons-material";
+import { WindowName } from "../store/slices/windowsInitialState";
 
 export enum NavigationTypes {
   Button = "button",
@@ -6,14 +7,12 @@ export enum NavigationTypes {
 }
 
 export interface NavigationItemBase {
-  key: string;
-  label: string;
+  label: WindowName;
   Icon: SvgIconComponent;
 }
 
 export interface NavigationButton extends NavigationItemBase {
   type: NavigationTypes.Button;
-  onClick: () => void;
 }
 
 export interface NavigationAccordion extends NavigationItemBase {
@@ -24,4 +23,3 @@ export interface NavigationAccordion extends NavigationItemBase {
 export type NavigationItem = NavigationAccordion | NavigationButton;
 
 export type NavigationsConfig = NavigationItem[];
-
