@@ -1,13 +1,13 @@
 import CloseIcon from "@mui/icons-material/Close";
 import { Box, Typography, IconButton } from "@mui/material";
 
+import { WindowData } from "../../types/windows";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { closeWindow, openWindow } from "../../store/slices/windowsSlice";
 import { WindowName } from "../../store/slices/windowsInitialState";
 import { getIconByName } from "../../config/drawerNavigationButtons";
 
 import { windowBarStyles } from "./WindowBar.styles";
-import { WindowData } from "../../types/windows";
 
 interface WindowBarProps {
   windowKey: WindowName;
@@ -28,7 +28,13 @@ export const WindowBar = ({ windowKey, window }: WindowBarProps) => {
       <Typography variant="body2" sx={windowBarStyles.title}>
         {window.title}
       </Typography>
-      <IconButton size="small" onClick={() => dispatch(closeWindow(windowKey))}>
+      <IconButton
+        size="small"
+        onClick={(event) => {
+          event.stopPropagation();
+          dispatch(closeWindow(windowKey));
+        }}
+      >
         <CloseIcon fontSize="small" />
       </IconButton>
     </Box>

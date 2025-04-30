@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import windowsReducer from "./slices/windowsSlice";
 
 export const store = configureStore({

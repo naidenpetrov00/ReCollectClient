@@ -14,7 +14,8 @@ export const openWindowAction = (
     window.focused = true;
     if (!window.isOpen) {
       window.isOpen = true;
-      state.openedOrder.push(action.payload);
+      if (!state.openedOrder.includes(window.title))
+        state.openedOrder.push(window.title);
     }
   }
 };
@@ -26,8 +27,9 @@ export const closeWindowAction = (
   if (window && window.isOpen) {
     window.isOpen = false;
     unFocus(state);
+
     state.openedOrder = state.openedOrder.filter(
-      (name) => name !== action.payload
+      (name) => name !== window.title
     );
   }
 };

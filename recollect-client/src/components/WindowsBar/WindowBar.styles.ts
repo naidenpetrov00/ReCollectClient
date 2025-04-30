@@ -15,8 +15,7 @@ export const windowBarStyles: WindowBarStyles = {
     borderRadius: 1,
     transform: focused ? "scale(1.1)" : "scale(1)",
     m: focused ? 1 : 0,
-     cursor: "grab"
-    // maxWidth: "50px",
+    cursor: "grab",
   }),
   title: {
     color: "black",

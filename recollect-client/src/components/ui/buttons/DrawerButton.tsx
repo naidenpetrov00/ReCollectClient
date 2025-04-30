@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 
-import { NavigationButton } from "../../../types/navigation";
 import { useAppDispatch } from "../../../hooks/reduxHooks";
+import { NavigationButton } from "../../../types/navigation";
 import { openWindow } from "../../../store/slices/windowsSlice";
 
 type DrawerButtonProps = {

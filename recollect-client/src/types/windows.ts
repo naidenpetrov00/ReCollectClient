@@ -1,6 +1,7 @@
 import { WindowName } from "../store/slices/windowsInitialState";
 
 export type WindowData = {
+  key: WindowName;
   title: string;
   isOpen: boolean;
   focused: boolean;
@@ -12,5 +13,5 @@ export type WindowsData = {
 
 export type WindowsState = {
   windowsData: WindowsData;
-  openedOrder: WindowName[];
+  openedOrder: string[];
 };

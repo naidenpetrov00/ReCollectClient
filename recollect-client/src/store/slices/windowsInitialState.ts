@@ -1,4 +1,4 @@
-import { WindowsData, WindowsState } from "../../types/windows";
+import { WindowsState } from "../../types/windows";
 
 export type WindowName = "CasesList" | "NewCase" | "Case"; // add more names here
 
@@ -9,9 +9,13 @@ const initialStateOfWindow = {
 
 export const initialState: WindowsState = {
   windowsData: {
-    Case: { title: "Case", ...initialStateOfWindow },
-    CasesList: { title: "Cases List", ...initialStateOfWindow },
-    NewCase: { title: "New Case", ...initialStateOfWindow },
+    Case: { key: "Case", title: "Case", ...initialStateOfWindow },
+    CasesList: {
+      key: "CasesList",
+      title: "Cases List",
+      ...initialStateOfWindow,
+    },
+    NewCase: { key: "NewCase", title: "New Case", ...initialStateOfWindow },
   },
   openedOrder: [],
 };
