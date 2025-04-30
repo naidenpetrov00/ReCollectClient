@@ -33,6 +33,16 @@ export const closeWindowAction = (
     );
   }
 };
+export const focusOnWindowAction = (
+  state: WindowsState,
+  action: PayloadAction<WindowName>
+) => {
+  const window = state.windowsData[action.payload];
+  if (window) {
+    unFocus(state);
+    window.focused = true;
+  }
+};
 
 const increment: CaseReducer<number, PayloadAction<number>> = (state, action) =>
   state + action.payload;

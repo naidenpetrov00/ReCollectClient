@@ -12,8 +12,10 @@ import {
 } from "@mui/material";
 import { af } from "react-router/dist/development/route-data-5OzAzQtT";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
-import { openWindow } from "../../../store/slices/windowsSlice";
+import { focusOnWindow, openWindow } from "../../../store/slices/windowsSlice";
 import { useSelector } from "react-redux";
+import { title } from "process";
+import { WindowName } from "../../../store/slices/windowsInitialState";
 
 function PaperComponent(props: PaperProps) {
   const nodeRef = React.useRef<HTMLDivElement>(null);
@@ -31,15 +33,21 @@ function PaperComponent(props: PaperProps) {
 
 interface WindowLayoutProps {
   title: string;
-  open: boolean;
+  windowKey: WindowName;
+  focused: boolean;
   onClose?: () => void;
   children?: ReactNode;
 }
 
-export const WindowLayout = ({ title, children, open }: WindowLayoutProps) => {
-  const [minimized, setMinimized] = useState(false);
+export const WindowLayout = ({
+  focused,
+  children,
+  windowKey,
+}: WindowLayoutProps) => {
   const [container, setContainer] = useState<HTMLElement | null>(null);
   const [maxSize, setMaxSize] = useState({ width: 1000, height: 800 });
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const mainEL = document.getElementById("window-container");
@@ -61,7 +69,10 @@ export const WindowLayout = ({ title, children, open }: WindowLayoutProps) => {
   return (
     <React.Fragment>
       <Dialog
-        open={open}
+        open={true}
+        onClick={
+          !focused ? () => dispatch(focusOnWindow(windowKey)) : undefined
+        }
         container={container}
         PaperComponent={PaperComponent}
         aria-labelledby={`draggable-dialog-title`}
@@ -69,6 +80,7 @@ export const WindowLayout = ({ title, children, open }: WindowLayoutProps) => {
         disableEnforceFocus
         disableScrollLock
         style={{ pointerEvents: "none" }}
+        sx={{ zIndex: focused ? 10 : 0 }}
         slotProps={{
           paper: {
             sx: {
@@ -84,7 +96,7 @@ export const WindowLayout = ({ title, children, open }: WindowLayoutProps) => {
         }}
       >
         <DialogTitle style={{ cursor: "move" }} id={`draggable-dialog-title`}>
-          Subscribe
+          {focused ? "Focused" : "Not"}
         </DialogTitle>
         <DialogContent>{children}</DialogContent>
         <DialogActions>

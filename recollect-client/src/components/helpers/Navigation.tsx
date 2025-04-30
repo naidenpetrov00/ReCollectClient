@@ -21,13 +21,18 @@ export const Navigation = () => {
           return <DrawerButtonsList key={index} navigation={navigation} />;
         }
       })}
-      {Object.entries(openedWindows).map(([key, window]) => (
-        <WindowLayout
-          key={key}
-          title={window.title}
-          open={window.isOpen}
-        ></WindowLayout>
-      ))}
+      {Object.entries(openedWindows)
+        .sort(([, a], [, b]) => (b.focused ? 1 : 0) - (a.focused ? 1 : 0))
+        .map(([key, window]) => {
+          return (
+            <WindowLayout
+              key={key}
+              windowKey={window.key}
+              title={window.title}
+              focused={window.focused}
+            ></WindowLayout>
+          );
+        })}
     </Box>
   );
 };

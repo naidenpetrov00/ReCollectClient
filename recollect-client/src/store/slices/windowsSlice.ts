@@ -1,8 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import {
+  closeWindowAction,
+  focusOnWindowAction,
+  openWindowAction,
+} from "./reducers/windowReducers";
 import { RootState } from "../store";
 import { initialState } from "./windowsInitialState";
-import { closeWindowAction, openWindowAction } from "./reducers/windowReducers";
 
 export const windowsSlice = createSlice({
   name: "Windows",
@@ -10,6 +14,7 @@ export const windowsSlice = createSlice({
   reducers: {
     openWindow: openWindowAction,
     closeWindow: closeWindowAction,
+    focusOnWindow: focusOnWindowAction,
     incrementByAmount: () => {},
   },
 });
@@ -17,6 +22,6 @@ export const windowsSlice = createSlice({
 export const selectOpenedWindows = (state: RootState) =>
   Object.values(state.windows.windowsData).filter((window) => window.isOpen);
 
-export const { openWindow, closeWindow } = windowsSlice.actions;
+export const { openWindow, closeWindow, focusOnWindow } = windowsSlice.actions;
 
 export default windowsSlice.reducer;
