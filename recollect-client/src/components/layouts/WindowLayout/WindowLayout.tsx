@@ -1,35 +1,20 @@
-import Draggable from "react-draggable";
 import React, { useState, ReactNode, useEffect } from "react";
 
 import {
-  PaperProps,
-  Paper,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
 } from "@mui/material";
-import { af } from "react-router/dist/development/route-data-5OzAzQtT";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
-import { focusOnWindow, openWindow } from "../../../store/slices/windowsSlice";
-import { useSelector } from "react-redux";
-import { title } from "process";
+
+import { PaperComponent } from "./PaperComponent";
+
+import { useAppDispatch } from "../../../hooks/reduxHooks";
+import { focusOnWindow } from "../../../store/slices/windowsSlice";
 import { WindowName } from "../../../store/slices/windowsInitialState";
 
-function PaperComponent(props: PaperProps) {
-  const nodeRef = React.useRef<HTMLDivElement>(null);
-  return (
-    <Draggable
-      nodeRef={nodeRef as React.RefObject<HTMLDivElement>}
-      handle="#draggable-dialog-title"
-      cancel={'[class*="MuiDialogContent-root"]'}
-      bounds="#window-container"
-    >
-      <Paper {...props} ref={nodeRef} />
-    </Draggable>
-  );
-}
+import { windowLayoutStyle } from "./WindowLayout.style";
 
 interface WindowLayoutProps {
   title: string;
@@ -46,6 +31,12 @@ export const WindowLayout = ({
 }: WindowLayoutProps) => {
   const [container, setContainer] = useState<HTMLElement | null>(null);
   const [maxSize, setMaxSize] = useState({ width: 1000, height: 800 });
+  const [dragBounds, setDragBounds] = useState({
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  });
 
   const dispatch = useAppDispatch();
 
@@ -58,6 +49,13 @@ export const WindowLayout = ({
       setMaxSize({
         width: rect.width,
         height: rect.height,
+      });
+
+      setDragBounds({
+        left: rect.left,
+        top: rect.top,
+        right: window.innerWidth - rect.right,
+        bottom: window.innerHeight - rect.bottom,
       });
     }
   }, []);
@@ -74,28 +72,26 @@ export const WindowLayout = ({
           !focused ? () => dispatch(focusOnWindow(windowKey)) : undefined
         }
         container={container}
+        // PaperComponent={(props) => (
+        // <PaperComponent {...props} dragBounds={dragBounds} />
+        // )}
         PaperComponent={PaperComponent}
         aria-labelledby={`draggable-dialog-title`}
         hideBackdrop
         disableEnforceFocus
         disableScrollLock
-        style={{ pointerEvents: "none" }}
-        sx={{ zIndex: focused ? 10 : 0 }}
+        style={windowLayoutStyle.dialogStyle}
+        sx={windowLayoutStyle.dialogSx(focused)}
         slotProps={{
           paper: {
-            sx: {
-              pointerEvents: "auto",
-              resize: "both",
-              overflow: "auto",
-              minWidth: 300,
-              minHeight: 200,
-              maxWidth: maxSize.width,
-              maxHeight: maxSize.height,
-            },
+            sx: windowLayoutStyle.dialogPaper(maxSize.width, maxSize.height),
           },
         }}
       >
-        <DialogTitle style={{ cursor: "move" }} id={`draggable-dialog-title`}>
+        <DialogTitle
+          style={windowLayoutStyle.dialogTitleStyle}
+          id={`draggable-dialog-title`}
+        >
           {focused ? "Focused" : "Not"}
         </DialogTitle>
         <DialogContent>{children}</DialogContent>
