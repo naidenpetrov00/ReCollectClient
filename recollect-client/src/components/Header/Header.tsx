@@ -79,12 +79,12 @@ export const Header: React.FC<HeaderProps> = ({
         </Toolbar>
       </AppBar>
 
-      <Drawer
+      {/* <Drawer
         drawerOpen={drawerOpen}
         isMediumUp={isMediumUp}
         toggleDrawer={toggleDrawer}
         transitionDuration={transitionDuration}
-      />
+      /> */}
     </Fragment>
   );
 };
