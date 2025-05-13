@@ -15,6 +15,7 @@ import { focusOnWindow } from "../../../store/slices/windowsSlice";
 import { WindowName } from "../../../store/slices/windowsInitialState";
 
 import { windowLayoutStyle } from "./WindowLayout.style";
+import { CustomDraggablePaper } from "./CustomDraggablePaper";
 
 interface WindowLayoutProps {
   title: string;
@@ -75,7 +76,9 @@ export const WindowLayout = ({
         // PaperComponent={(props) => (
         // <PaperComponent {...props} dragBounds={dragBounds} />
         // )}
-        PaperComponent={PaperComponent}
+        PaperComponent={(props) => (
+          <CustomDraggablePaper bounds={dragBounds} {...props} />
+        )}
         aria-labelledby={`draggable-dialog-title`}
         hideBackdrop
         disableEnforceFocus

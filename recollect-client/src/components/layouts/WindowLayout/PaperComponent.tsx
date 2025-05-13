@@ -11,7 +11,7 @@ export function PaperComponent(props: PaperProps) {
       nodeRef={nodeRef as React.RefObject<HTMLDivElement>}
       handle="#draggable-dialog-title"
       cancel={'[class*="MuiDialogContent-root"]'}
-      positionOffset={{ x: "250px", y: 0 }}
+      positionOffset={{ x: "250px", y: "40px" }}
       // bounds={{
       //   left: 100,
       //   top: 0,
@@ -24,3 +24,4 @@ export function PaperComponent(props: PaperProps) {
     </Draggable>
   );
 }
+ 
